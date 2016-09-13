@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Paper Free on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/paper-free/</link>
+    <description>Recent content in Paper Free on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Wed, 30 Dec 2015 21:35:27 +0000</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/paper-free/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fujitsu SnapScan 1300i with Ubuntu</title>
+      <link>http://www.linuxuk.org/post/20151230_scansnap1300i_ubuntu/</link>
+      <pubDate>Wed, 30 Dec 2015 21:35:27 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20151230_scansnap1300i_ubuntu/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using the &lt;a href=&#34;http://www.fujitsu.com/uk/products/computing/peripheral/scanners/scansnap/s1300i/&#34;&gt;Fujitsu ScanSnap 1300i&lt;/a&gt; on Mac OS X for some time now in the pursuit of a paperless life but now that I am using Ubuntu more and more it was apparent that I was going to have to get this little scanner working on Linux. Searching the internet threw up a few interesting articles but nothing worked 100%. In the end the steps I used under Ubuntu 15.10 were:&lt;/p&gt;
+
+&lt;p&gt;Install &lt;strong&gt;&lt;em&gt;sane&lt;/em&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;gscan2pdf&lt;/em&gt;&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install sane gscan2pdf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Download the scanner firmware from &lt;a href=&#34;http://www.openfusion.net/public/files/1300i_0D12.nal&#34;&gt;http://www.openfusion.net/public/files/1300i_0D12.nal&lt;/a&gt; copy it to the relevant directory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ wget http://www.openfusion.net/public/files/1300i_0D12.nal &amp;amp;&amp;amp; sudo mkdir /usr/share/sane/epjitsu &amp;amp;&amp;amp; sudo cp 1300i_0D12.nal /usr/share/sane/epjitsu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Open up the scanner lid first then initialise it with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo scanimage -L
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run the gscan2pdf application:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gscan2pdf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can tweak some of the scanner options by clicking the scan button and playing around with the pop-up box tabs. For me the most important were to select duplex as I regularly scan double-sided documents and to select colour.&lt;/p&gt;
+
+&lt;p&gt;Happy scanning.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

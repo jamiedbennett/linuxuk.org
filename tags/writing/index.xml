@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Writing on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/writing/</link>
+    <description>Recent content in Writing on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Wed, 18 Feb 2015 10:18:26 +0000</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/writing/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Getting back into blogging</title>
+      <link>http://www.linuxuk.org/post/20150218-more-blogging/</link>
+      <pubDate>Wed, 18 Feb 2015 10:18:26 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20150218-more-blogging/</guid>
+      <description>&lt;p&gt;Its been a while, in fact it has been around a year since I updated this site (to be fair I did write a few posts on another blog during that period &amp;hellip; &lt;em&gt;excuses&lt;/em&gt;, &lt;em&gt;excuses&lt;/em&gt;) which I attribute to a increasingly busy schedule but more to a lack of enthusiasm. So, in an attempt to get back into this blogging lark I thought it would be a good opportunity to redesign the site with &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, a static, but more importantly Markdown-based web engine, and put up a few articles on something dear to my heart, Software Engineering. So expect more development related posts interspersed with running, triathlon, travel, and other randomness as I attept to do this on a semi-regular basis.&lt;/p&gt;
+
+&lt;p&gt;Oh, and if you are looking for any of my past entries from 2007 onwards, they will be back up shortly as I figure out how to convert WordPress content to Hugo and still keep some form resemblence to the original post.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

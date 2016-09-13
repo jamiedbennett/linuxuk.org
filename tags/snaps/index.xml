@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Snaps on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/snaps/</link>
+    <description>Recent content in Snaps on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Fri, 01 Jul 2016 20:32:12 +0100</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/snaps/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>snap try: The quick way to package snaps</title>
+      <link>http://www.linuxuk.org/post/snap_try/</link>
+      <pubDate>Fri, 01 Jul 2016 20:32:12 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/snap_try/</guid>
+      <description>&lt;p&gt;This weeks snippet is all to do with improving the snap developer experience.&lt;/p&gt;
+
+&lt;p&gt;Since the release of snapd 2.0.8 we have added one of the most useful tools for snap developers:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;snap try&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;What this does is effectively mounts any folder containing an unpackaged snap at &lt;code&gt;/snap/snapname&lt;/code&gt; as a writeable folder allowing quick iteration during the packaging process. No longer do you have to create a read-only squashfs snap and install it to try out your latest changes and this speeds up the workflow tremendously. The process I use from the package directory is:&lt;/p&gt;
+
+&lt;pre&gt;
+% snapcraft prime
+% snap try prime
+% /snap/bin/snapname
+... test/hack ....
+% snap remove &lt;snapname&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;When you are happy with your testing you can create the real snap file with:&lt;/p&gt;
+
+&lt;pre&gt;
+% snapcraft
+&lt;/pre&gt;
+
+&lt;p&gt;Happy snapping!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Are snaps really cross distro?</title>
+      <link>http://www.linuxuk.org/post/cross-distro-snaps/</link>
+      <pubDate>Thu, 16 Jun 2016 18:41:40 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/cross-distro-snaps/</guid>
+      <description>&lt;p&gt;Yesterday we announced the new home for everything snaps and Snapcraft, &lt;a href=&#34;http://www.snapcraft.io&#34;&gt;snapcraft.io&lt;/a&gt;, and at the same time made available the cross-distribution work that really does means snaps can run on virtually any Linux distribution. Today we have enabled support for Debian, Arch, Gentoo, Fedora, and of course Ubuntu and all its flavours but enabling more including OpenSUSE, CentOS, Elementary, Mint, OpenWrt and others is in the works.&lt;/p&gt;
+
+&lt;p&gt;The announcements was met with a mostly positive response which, given that Linux packaging has been an issue for so many people and for so long, is hardly surprising. This particular problem has resulted in the community creating a few different initiatives such as AppImage and OrbitalApps, tackling the problem in different ways and all of which have their own merits and limitations. In my opinion (of course slightly biased but based on technical fact), snaps are the best solution for a complete cross-platform universal package format whether that be for the Linux desktop, IoT and mobile devices, or the server. Snaps are surprisingly easy to use, encompass industry-leading security with AppArmor, Seccomp filters, and more, and all with the very familiar and popular Ubuntu development workflow. A special mention has to go to the tooling as well; Snapcraft is already pretty awesome but week after week new features are being added to improve this further and snapd, the tool that runs snaps in a confined environment, is seeing so much innovative, open development that these two are great examples of projects to get your teeth into if you are a developer, tester, or just want to dabble in an open source project.&lt;/p&gt;
+
+&lt;p&gt;There has been some doubt that snaps really could run on multiple distributions and, as part of the team who tested this extensively, I can definitely confirm this is the case. I played around with several native installations and VMs over the course of last week and the results were super positive. As the saying goes, a picture is worth a thousand words so I took a couple of screenshots. Enjoy!&lt;/p&gt;
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/snapd-cross-distro.png&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Snapcraft on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/snapcraft/</link>
+    <description>Recent content in Snapcraft on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Wed, 18 May 2016 09:40:26 +0100</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/snapcraft/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Snapping an Electron-based Application: Simplenote</title>
+      <link>http://www.linuxuk.org/post/20160518_snapping_electron_based_applications_simplenote/</link>
+      <pubDate>Wed, 18 May 2016 09:40:26 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20160518_snapping_electron_based_applications_simplenote/</guid>
+      <description>
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/simplenote.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/ubuntu-core/snapcraft/blob/master/README.md&#34;&gt;Snapcraft&lt;/a&gt; is described as a &lt;strong&gt;&lt;em&gt;“delightful packaging tool”&lt;/em&gt;&lt;/strong&gt;, enabling a developer to package their app from a single tree by aggregating the pieces from multiple places if necessary. It supports multiple build technologies and produces a .snap package with all its dependencies for Ubuntu Core and now the Ubuntu Classic Desktop (using snapd). It is the future of packaging for Linux-based systems. I encourage the reader to read the documentation on GitHub to get a flavour of what Snapcraft is and to learn more about the key concepts, setting up your system to produce snaps, and a nice first snap walkthrough example. For this post I am going to introduce a couple of concepts that served me well when snapping the &lt;a href=&#34;http://electron.atom.io&#34;&gt;Electron-based&lt;/a&gt; application, &lt;a href=&#34;https://simplenote.com&#34;&gt;Simplenote&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplenote:4408236ccc10409f19576a02bb19af53&#34;&gt;Simplenote&lt;/h2&gt;
+
+&lt;p&gt;Simplenote is a cross-platform note-taking application that uses &lt;a href=&#34;https://simperium.com&#34;&gt;Simperium&lt;/a&gt; to sync notes across Android, iOS, Mac, and of course Ubuntu (and other Linux systems). It has support for instant search, tags, note sharing, backups, and best of all it is free. This makes Simplenote a great choice if, like me, you use several systems on a daily basis.&lt;/p&gt;
+
+&lt;p&gt;Snapping Simplenote is relatively straight-forward but as I walk through the process below there are a few concepts that could help others snap applications. The rest of this post assumes you are using an Ubuntu 16.04-based system (VM, PC) and have installed snapcraft as per the instructions on the GitHub page.&lt;/p&gt;
+
+&lt;h2 id=&#34;snapcraft:4408236ccc10409f19576a02bb19af53&#34;&gt;Snapcraft&lt;/h2&gt;
+
+&lt;p&gt;First we need to get the latest version of Simplenote from GitHub, at time of writing this was 1.0.1.&lt;/p&gt;
+
+&lt;pre&gt;
+  wget https://github.com/Automattic/simplenote-electron/releases/download/v1.0.1/Simplenote-linux-x64.1.0.1.tar.gz
+  tar xvzf Simplenote-linux-x64.1.0.1.tar.gz
+&lt;/pre&gt;
+
+&lt;p&gt;Then we need to create our initial &lt;code&gt;snapcraft.yaml&lt;/code&gt; file in the Simplenote directory to tell Snapcraft how to package the application.&lt;/p&gt;
+
+&lt;pre&gt;
+  cd Simplenote-linux-x64
+  snapcraft init
+&lt;/pre&gt;
+
+&lt;p&gt;Running &lt;code&gt;snapcraft init&lt;/code&gt; creates a barebones file ready for editing. For Simplenote you need the following, don’t worry about the contents just yet, I will point out the important bits soon.&lt;/p&gt;
+
+&lt;pre&gt;
+name: simplenote
+version: 1.0.1
+summary: The simplest way to keep notes.
+description: The simplest way to keep notes. Light, clean, and free.
+apps:
+  simplenote:
+    command: wrapper
+    plugs: [unity7, opengl, network]
+parts:
+  simplenote:
+    plugin: copy
+    stage-packages:
+      - libnss3
+      - fontconfig-config
+      - gnome-themes-standard
+    files:
+      Simplenote: Simplenote
+      wrapper: usr/bin/wrapper
+      icudtl.dat: icudtl.dat
+      snapshot_blob.bin: snapshot_blob.bin
+      natives_blob.bin: natives_blob.bin
+      resources*: resources
+      libnode.so: usr/lib/x86_64-linux-gnu/libnode.so
+      libffmpeg.so: usr/lib/x86_64-linux-gnu/libffmpeg.so
+&lt;/pre&gt;
+
+&lt;p&gt;The first 4 lines of the file are there to describe details about the package itself including the name, version number, and a plain text summary and description. After that we get on to the sections that describe how the application is executed and what features it needs from the underlying system. &lt;code&gt;command&lt;/code&gt; is the command to run on execution and &lt;code&gt;plugs&lt;/code&gt; tells the system that this application wants to use the &lt;code&gt;unity7&lt;/code&gt;, &lt;code&gt;opengl&lt;/code&gt;, and &lt;code&gt;network&lt;/code&gt; interfaces - all mandatory for Simplenote. You can read more about interfaces in Zygmunt’s series of &lt;a href=&#34;http://www.zygoon.pl/2016/04/snappy-snapcraft-and-interfaces.html&#34;&gt;interface articles&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a side note, the command entry is a little different for this application as Simplenote (and other Electron-based apps) need a few environment variables set up before the actual binary can be called. This is accomplished by creating a wrapper script that does this set up. The contents of the wrapper file can be seen later in this post.&lt;/p&gt;
+
+&lt;p&gt;Back to the &lt;code&gt;snapcraft.yaml&lt;/code&gt; file. The &lt;code&gt;parts&lt;/code&gt; section describes what Snapcraft needs to do when creating the the &lt;code&gt;.snap&lt;/code&gt; package. In this case we rely on the &lt;code&gt;copy&lt;/code&gt; plugin that enables, you guessed it, copying of files from the host system during packaging to the snap package. The actual files to copy are listed in the &lt;code&gt;files&lt;/code&gt; section. This copying is done to ensure that Simplenote has all the libraries and binary blobs necessary to execute once mounted within it’s snap-based confined area, running on a Snappy system. The format is:&lt;/p&gt;
+
+&lt;pre&gt;file_to_copy: destination_in_the_snap&lt;/pre&gt;
+
+&lt;p&gt;One entry that sticks out a little is the resources line:&lt;/p&gt;
+
+&lt;pre&gt;resources*: resources&lt;/pre&gt;
+
+&lt;p&gt;The use of the globbing wildcard ‘&lt;code&gt;*&lt;/code&gt;’ ensures that the whole resources directory is copied across.&lt;/p&gt;
+
+&lt;p&gt;One section we skipped over was &lt;code&gt;stage-packages&lt;/code&gt;. Snapcraft is a very clever tool and we benefit from it’s knowledge of Debian-based packages by stating in this section that we want to install &lt;code&gt;libnss3&lt;/code&gt;, &lt;code&gt;fontconfig-config&lt;/code&gt;, and &lt;code&gt;gnome-themes-standard&lt;/code&gt; from the Ubuntu archive into the snap; again these are required packages for Simplenote.&lt;/p&gt;
+
+&lt;p&gt;Another side note. To understand what libraries are required by a binary like Simplenote we can use the ldd command:&lt;/p&gt;
+
+&lt;pre&gt;ldd Simplenote&lt;/pre&gt;
+
+&lt;p&gt;This produces an output that can be studied to understand where the binary is looking for its dependencies. Simplenote comes with a couple of libraries embedded in the package, namely &lt;code&gt;libnode.so&lt;/code&gt; and &lt;code&gt;libffmpeg.so&lt;/code&gt; and ldd shows these on my system as:&lt;/p&gt;
+
+&lt;pre&gt;
+libnode.so =&gt; /home/jamie/snapping/simplenote/Simplenote-linux-x64/./libnode.so (0x00007fa6caa85000)
+libffmpeg.so =&gt; /home/jamie/snapping/simplenote/Simplenote-linux-x64/./libffmpeg.so (0x00007fa6c5801000)
+&lt;/pre&gt;
+
+&lt;p&gt;Notice that the entry after ‘&lt;code&gt;=&amp;gt;&lt;/code&gt;’ points to local .so files in the &lt;code&gt;Simplenote-linux-x64&lt;/code&gt; directory, this means that we need to copy these over into the snap, hence the &lt;code&gt;copy&lt;/code&gt; entry in the &lt;code&gt;snapcraft.yaml&lt;/code&gt; file. All other libraries are present on the host system and will be used automatically by Snapcraft.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-code-wrapper-code-file:4408236ccc10409f19576a02bb19af53&#34;&gt;The &lt;code&gt;wrapper&lt;/code&gt; file&lt;/h2&gt;
+
+&lt;p&gt;The contents of the wrapper file discussed above are:&lt;/p&gt;
+
+&lt;pre&gt;
+#!/bin/sh
+export FONTCONFIG_PATH=$SNAP/etc/fonts
+export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
+export XDG_DATA_HOME=$SNAP/usr/share
+export LD_LIBRARY_PATH=$SNAP_LIBRARY_PATH:$SNAP/usr/lib/x86_64-linux-gnu/
+exec &#34;$SNAP/Simplenote&#34; &#34;$@&#34;
+&lt;/pre&gt;
+
+&lt;p&gt;There is nothing too exciting about this file, we set up the fonts path to be inside the snap directory itself (remember snaps are confined) as well as the share folder. We also set the &lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt; to ensure that the snap is looking for it’s libraries in the right location, namely &lt;code&gt;$SNAP/usr/lib/x86_64-linux-gnu/&lt;/code&gt;. Again, looking at the &lt;code&gt;snapcraft.yaml&lt;/code&gt; file you can see that we copy &lt;code&gt;libnode.so&lt;/code&gt; and &lt;code&gt;libffmpeg.so&lt;/code&gt; here to ensure Simplenote does not complain about missing libs. The last line executes the Simplenote binary.&lt;/p&gt;
+
+&lt;p&gt;The wrapper file needs to be executable so we do this using the chmod command:&lt;/p&gt;
+
+&lt;pre&gt;
+  chmod +x wrapper
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;building-and-installing:4408236ccc10409f19576a02bb19af53&#34;&gt;Building and Installing&lt;/h2&gt;
+
+&lt;p&gt;All that is left to do is build and install the snap.&lt;/p&gt;
+
+&lt;pre&gt;
+  snapcraft
+  sudo snap install simplenote_1.0.1_amd64.snap
+&lt;/pre&gt;
+
+&lt;p&gt;This process will pull down any dependencies and create the squashfs-based &lt;code&gt;.snap&lt;/code&gt; file. After this we should have a &lt;code&gt;simplenote_1.0.1_amd64.snap&lt;/code&gt; file in the local directory ready to be installed with the &lt;code&gt;snap install&lt;/code&gt; command. One caveat at the moment is that Simplenote will expect to use &lt;code&gt;dbus&lt;/code&gt; and with AppArmor confinement this is not possible with the application we just built. It is possible to get around this but I will leave that as an exercise for a later post.&lt;/p&gt;
+
+&lt;p&gt;If you try to run the application using:&lt;/p&gt;
+
+&lt;pre&gt;
+  simplenote
+&lt;/pre&gt;
+
+&lt;p&gt;You will see the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/simplenote_apparmor_error.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;What we can do, which introduces a new concept nicely, is use &lt;code&gt;—devmode&lt;/code&gt;. devmode allows the snap to break out of it’s confinement during development to quickly get up and running. From there you can look at what policy violations would potentially occur and adjust your application accordingly. When you are happy that your application is working in a confined environment you can simply install without devmode to test.&lt;/p&gt;
+
+&lt;p&gt;To install Simplenote with devmode you can use the &lt;code&gt;—devmode&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;
+  sudo snap install —devmode simplenote_1.0.1.snap
+&lt;/pre&gt;
+
+&lt;p&gt;Running &lt;code&gt;simplenote&lt;/code&gt; now produces the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img align=“centre” src=&#34;http://www.linuxuk.org/media/simplenote_login.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;It is not perfect but that wasn’t the aim of this post. Instead we looked at packaging an application, copying files inside the snap using &lt;code&gt;copy&lt;/code&gt;, using a wrapper file to set up a snap environment, and now to conclude lets introduce another little snippet of information to help you debug your snapping process: &lt;code&gt;busybox&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;debugging-snaps-using-code-busybox-code:4408236ccc10409f19576a02bb19af53&#34;&gt;Debugging snaps using &lt;code&gt;busybox&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;Snapping an application is usually pretty simple but when you get stuck and just need to look inside the snap itself to see what is going on there is a simple trick to allow you to do this. Adding &lt;code&gt;busybox&lt;/code&gt; as an application to your snap gives you to have a shell environment right there in the snap. This allows you to poke and prod at directories, seeing if files you thought you copied over are present, and generally debugging (you can also add &lt;code&gt;gdb&lt;/code&gt; and other tools if necessary in the same way).&lt;/p&gt;
+
+&lt;p&gt;To add &lt;code&gt;busybox&lt;/code&gt; we would modify the &lt;code&gt;snapcraft.yaml&lt;/code&gt; file above as follows:&lt;/p&gt;
+
+&lt;pre&gt;
+name: simplenote
+version: 1.0.1
+summary: The simplest way to keep notes.
+description: The simplest way to keep notes. Light, clean, and free.
+apps:
+  simplenote:
+    command: wrapper
+    plugs: [unity7, opengl, network]
+  busy box:
+    command: sh
+    plugs: [unity7, opengl, network]
+parts:
+  simplenote:
+    plugin: copy
+    stage-packages:
+      - libnss3
+      - fontconfig-config
+      - gnome-themes-standard
+    files:
+      Simplenote: Simplenote
+      wrapper: usr/bin/wrapper
+  busybox:
+    plugin: nil
+    stage-packages:
+      - busybox
+&lt;/pre&gt;
+
+&lt;p&gt;Notice the extra busybox-related lines. To access &lt;code&gt;busybox&lt;/code&gt; once the snap is installed you can use:&lt;/p&gt;
+
+&lt;pre&gt;
+  simplenote.busybox
+&lt;/pre&gt;
+
+&lt;p&gt;Important directories are:
+&lt;pre&gt;
+$SNAP - the snaps home directory i.e. /snap/simplenote/id
+$SNAP_DATA - the snaps data directory in var i.e. /var/snap/simplenote/id
+$SNAP_USER_DATA - the snaps user data directory i.e. /home/jamie/snap/simplenote/id
+&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;All of the above directories are on a Classic 16.04 Ubuntu system.&lt;/p&gt;
+
+&lt;p&gt;All code can be found at:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/jamiedbennett/snaps/tree/master/simplenote&#34;&gt;https://github.com/jamiedbennett/snaps/tree/master/simplenote&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The next steps for this application are to sort out the fonts and menu spacing, add a &lt;code&gt;.desktop&lt;/code&gt; file for dash discovery, get around the AppArmor violation, and upload to the store, but all of this is for another post.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

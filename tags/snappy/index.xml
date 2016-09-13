@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Snappy on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/snappy/</link>
+    <description>Recent content in Snappy on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Fri, 01 Jul 2016 20:32:12 +0100</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/snappy/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>snap try: The quick way to package snaps</title>
+      <link>http://www.linuxuk.org/post/snap_try/</link>
+      <pubDate>Fri, 01 Jul 2016 20:32:12 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/snap_try/</guid>
+      <description>&lt;p&gt;This weeks snippet is all to do with improving the snap developer experience.&lt;/p&gt;
+
+&lt;p&gt;Since the release of snapd 2.0.8 we have added one of the most useful tools for snap developers:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;snap try&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;What this does is effectively mounts any folder containing an unpackaged snap at &lt;code&gt;/snap/snapname&lt;/code&gt; as a writeable folder allowing quick iteration during the packaging process. No longer do you have to create a read-only squashfs snap and install it to try out your latest changes and this speeds up the workflow tremendously. The process I use from the package directory is:&lt;/p&gt;
+
+&lt;pre&gt;
+% snapcraft prime
+% snap try prime
+% /snap/bin/snapname
+... test/hack ....
+% snap remove &lt;snapname&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;When you are happy with your testing you can create the real snap file with:&lt;/p&gt;
+
+&lt;pre&gt;
+% snapcraft
+&lt;/pre&gt;
+
+&lt;p&gt;Happy snapping!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Are snaps really cross distro?</title>
+      <link>http://www.linuxuk.org/post/cross-distro-snaps/</link>
+      <pubDate>Thu, 16 Jun 2016 18:41:40 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/cross-distro-snaps/</guid>
+      <description>&lt;p&gt;Yesterday we announced the new home for everything snaps and Snapcraft, &lt;a href=&#34;http://www.snapcraft.io&#34;&gt;snapcraft.io&lt;/a&gt;, and at the same time made available the cross-distribution work that really does means snaps can run on virtually any Linux distribution. Today we have enabled support for Debian, Arch, Gentoo, Fedora, and of course Ubuntu and all its flavours but enabling more including OpenSUSE, CentOS, Elementary, Mint, OpenWrt and others is in the works.&lt;/p&gt;
+
+&lt;p&gt;The announcements was met with a mostly positive response which, given that Linux packaging has been an issue for so many people and for so long, is hardly surprising. This particular problem has resulted in the community creating a few different initiatives such as AppImage and OrbitalApps, tackling the problem in different ways and all of which have their own merits and limitations. In my opinion (of course slightly biased but based on technical fact), snaps are the best solution for a complete cross-platform universal package format whether that be for the Linux desktop, IoT and mobile devices, or the server. Snaps are surprisingly easy to use, encompass industry-leading security with AppArmor, Seccomp filters, and more, and all with the very familiar and popular Ubuntu development workflow. A special mention has to go to the tooling as well; Snapcraft is already pretty awesome but week after week new features are being added to improve this further and snapd, the tool that runs snaps in a confined environment, is seeing so much innovative, open development that these two are great examples of projects to get your teeth into if you are a developer, tester, or just want to dabble in an open source project.&lt;/p&gt;
+
+&lt;p&gt;There has been some doubt that snaps really could run on multiple distributions and, as part of the team who tested this extensively, I can definitely confirm this is the case. I played around with several native installations and VMs over the course of last week and the results were super positive. As the saying goes, a picture is worth a thousand words so I took a couple of screenshots. Enjoy!&lt;/p&gt;
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/snapd-cross-distro.png&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Contributing to the snapd project</title>
+      <link>http://www.linuxuk.org/post/contributing_to_snapd/</link>
+      <pubDate>Wed, 01 Jun 2016 09:40:26 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/contributing_to_snapd/</guid>
+      <description>
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/desktop.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;There is a lot of buzz around snaps, the new packaging format created by Canonical to enable secure, transactional, and robust application updates, and rightly so. This new method of distributing applications is revolutionizing not only software on IoT devices, but on the desktop, server, and beyond. The software that actually runs the snap applications is called &lt;code&gt;snapd&lt;/code&gt;. Hosted on &lt;a href=&#34;https://github.com/snapcore/snapd&#34;&gt;GitHub&lt;/a&gt;, &lt;code&gt;snapd&lt;/code&gt; uses the &lt;a href=&#34;https://golang.org&#34;&gt;Go language&lt;/a&gt; and is actively developed by a core set of developers, but, like most projects at Canonical, we actively encourage as much community participation as possible. One of the core developers, Zygmunt, posted a great outline on &lt;a href=&#34;http://www.zygoon.pl/2016/06/making-your-first-contribution-to-snapd.html&#34;&gt;how to make your first contribution to snapd&lt;/a&gt; and, taking up the challenge, I did exactly that.&lt;/p&gt;
+
+&lt;p&gt;Zygmunt&amp;rsquo;s instructions are pretty clear but I thought I would look at this from a new developer&amp;rsquo;s perspective, using a clean Ubuntu 16.04 install and with a new GitHub account. What follows is a guide to setting everything up ready for your first contribution. As a side note I have various machines I work on regularly, mainly my Lenovo laptop running Ubuntu, but also my Macbook Pro, and a HP Windows all-in-one. This allows me to look at the various platforms available to developers all of which are valid options for software development, especially in the IoT world.&lt;/p&gt;
+
+&lt;h2 id=&#34;installing-ubuntu-16-04:fe302d14b47fc72325260d8f135290c5&#34;&gt;Installing Ubuntu 16.04&lt;/h2&gt;
+
+&lt;p&gt;Installing Ubuntu is very straight-forward and, depending on the way you intend to run it, the instructions vary ever-so-slightly. There is a comprehensive guide to installing Ubuntu as the only OS available on the &lt;a href=&#34;http://www.ubuntu.com/download/desktop/install-ubuntu-desktop&#34;&gt;Ubuntu Site&lt;/a&gt; which will get you up and running in no time. Remember to download Ubuntu 16.04. On the Mac and Windows platform you will need to install Ubuntu as a Virtual Machine (VM) but again, this is straight-forward. I chose to use &lt;a href=&#34;https://www.virtualbox.org&#34;&gt;VirtualBox&lt;/a&gt; as it is free, feature-rich, and runs Ubuntu great; download it from the &lt;a href=&#34;https://www.virtualbox.org/wiki/Downloads&#34;&gt;website&lt;/a&gt;. The Ubuntu Community is great when it comes to sharing information and there are already many tutorials on how to get an Ubuntu VM working. Although a few years old now, the answer on &lt;a href=&#34;http://askubuntu.com/questions/142549/how-to-install-ubuntu-on-virtualbox&#34;&gt;AskUbuntu&lt;/a&gt; is still valid today and is worth reading after you have installed VirtualBox. I highly recommend you also install the &lt;a href=&#34;https://www.virtualbox.org/wiki/Downloads&#34;&gt;Guest Additions&lt;/a&gt; iso to enable functionality such as drag and drop between host and guest, and window resizing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/ubuntu-vm-mac.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a few extra packages you will need out-of-the-box for snapd development so once logged in to your shiny new Ubuntu install you will need to check for, and install, updates:&lt;/p&gt;
+
+&lt;pre&gt;
+  sudo apt-get update
+  sudo apt-get upgrade
+&lt;/pre&gt;
+
+&lt;p&gt;In addition to the updates you will need to install &lt;code&gt;git&lt;/code&gt;, &lt;code&gt;bzr&lt;/code&gt;, &lt;code&gt;golang&lt;/code&gt;, and it is useful to install &lt;code&gt;snapcraft&lt;/code&gt; and &lt;code&gt;snapcraft-examples&lt;/code&gt; for snapping applications later:&lt;/p&gt;
+
+&lt;pre&gt;
+  sudo apt-get install git bzr golang snapcraft snapcraft-examples
+&lt;/pre&gt;
+
+&lt;p&gt;So now you have Ubuntu on your development machine, what next?&lt;/p&gt;
+
+&lt;h2 id=&#34;github:fe302d14b47fc72325260d8f135290c5&#34;&gt;GitHub&lt;/h2&gt;
+
+&lt;p&gt;As stated previously, all &lt;code&gt;snapd&lt;/code&gt; development occurs in GitHub. To be able to contribute to the project you will need a GitHub account so go ahead and create one. Fortunately GitHub&amp;rsquo;s documentation is easy to follow so you will need to &lt;a href=&#34;https://help.github.com/articles/signing-up-for-a-new-github-account/&#34;&gt;sign up for a new account&lt;/a&gt; - a free account is just fine, and follow that up by &lt;a href=&#34;https://help.github.com/articles/set-up-git/&#34;&gt;setting up Git&lt;/a&gt;. We are going to be using ssh for cloning so &lt;a href=&#34;https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent&#34;&gt;generating SSH keys&lt;/a&gt; is also needed but if this is a little too scary you can use the &lt;a href=&#34;https://help.github.com/articles/which-remote-url-should-i-use/#cloning-with-https-urls-recommended&#34;&gt;HTTPS method&lt;/a&gt; instead, just be aware that instructions further down and in Zygmunt&amp;rsquo;s post will need to be modified slightly but I&amp;rsquo;ll point that out. For reference there is a good &lt;a href=&#34;[Git Cheatsheet](https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf&#34;&gt;Git cheatsheet&lt;/a&gt; available from GitHub that is worth looking at.&lt;/p&gt;
+
+&lt;p&gt;Now we have a working Ubuntu install, Git and GitHub all set up, it is time to get developing.&lt;/p&gt;
+
+&lt;h2 id=&#34;snapd-development:fe302d14b47fc72325260d8f135290c5&#34;&gt;snapd development&lt;/h2&gt;
+
+&lt;p&gt;Fortunately Zygmunt has this bit covered. He has a &lt;a href=&#34;http://www.zygoon.pl/2016/06/making-your-first-contribution-to-snapd.html&#34;&gt;great tutorial&lt;/a&gt; on how to fork the &lt;code&gt;snapd&lt;/code&gt; project in GitHub (just go to the project and click the Fork button in the top-right corner) and set up the GO environment variables ready for development. I highly recommend using the same directory structure as Zygmunt (mine is &lt;code&gt;~/development/src/github.com/snapcore/snapd&lt;/code&gt; for &lt;code&gt;snapd&lt;/code&gt;) as this allows you to use his very useful &lt;code&gt;devtools&lt;/code&gt; branch for useful helper functions and make sure you run the &lt;code&gt;get-deps.sh&lt;/code&gt; script in the &lt;code&gt;snapd&lt;/code&gt; directory to ensure you have everything set up correctly. Make sure to also get the &lt;code&gt;devtools&lt;/code&gt; branch with a &lt;/code&gt;git clone&lt;/code&gt; and have this ready somewhere in your development directory outside of the snapd directory.&lt;/p&gt;
+
+&lt;pre&gt;
+  git clone git@github.com:zyga/devtools
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/snapd-refresh-bits.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Development workflow is particularly nice. You hack on the code, run the tests, refresh the &lt;code&gt;snapd&lt;/code&gt; code with your changes, and test them manually. The &lt;code&gt;refresh-bits&lt;/code&gt; script from &lt;code&gt;devtools&lt;/code&gt; starts up a separate instance of &lt;code&gt;snapd&lt;/code&gt; with your changes and allows you to install snaps and test your code without affecting the host system. On my system this looks something like this (expanded a little for clarity):&lt;/p&gt;
+
+&lt;pre&gt;
+cd ~/development/src/github.com/snapcore/snapd
+** hack, hack, hack **
+./run-checks
+** iterate until the tests are happy **
+cd ~/development/src/github.com/devtools
+./refresh-bits snap snapd setup run-snapd restore
+** open second terminal and test changes **
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;whats-next:fe302d14b47fc72325260d8f135290c5&#34;&gt;Whats next?&lt;/h2&gt;
+
+&lt;p&gt;Well that bit is easy, talk to the developers on &lt;a href=&#34;https://webchat.freenode.net/?channels=snappy&#34;&gt;irc&lt;/a&gt;, sign up to the &lt;a href=&#34;https://lists.ubuntu.com/mailman/listinfo/snapcraft&#34;&gt;mailing list&lt;/a&gt;, go find a &lt;a href=&#34;https://bugs.launchpad.net/snappy&#34;&gt;bug to fix&lt;/a&gt;, but most importantly, get involved!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Snapping an Electron-based Application: Simplenote</title>
+      <link>http://www.linuxuk.org/post/20160518_snapping_electron_based_applications_simplenote/</link>
+      <pubDate>Wed, 18 May 2016 09:40:26 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20160518_snapping_electron_based_applications_simplenote/</guid>
+      <description>
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/simplenote.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/ubuntu-core/snapcraft/blob/master/README.md&#34;&gt;Snapcraft&lt;/a&gt; is described as a &lt;strong&gt;&lt;em&gt;“delightful packaging tool”&lt;/em&gt;&lt;/strong&gt;, enabling a developer to package their app from a single tree by aggregating the pieces from multiple places if necessary. It supports multiple build technologies and produces a .snap package with all its dependencies for Ubuntu Core and now the Ubuntu Classic Desktop (using snapd). It is the future of packaging for Linux-based systems. I encourage the reader to read the documentation on GitHub to get a flavour of what Snapcraft is and to learn more about the key concepts, setting up your system to produce snaps, and a nice first snap walkthrough example. For this post I am going to introduce a couple of concepts that served me well when snapping the &lt;a href=&#34;http://electron.atom.io&#34;&gt;Electron-based&lt;/a&gt; application, &lt;a href=&#34;https://simplenote.com&#34;&gt;Simplenote&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplenote:4408236ccc10409f19576a02bb19af53&#34;&gt;Simplenote&lt;/h2&gt;
+
+&lt;p&gt;Simplenote is a cross-platform note-taking application that uses &lt;a href=&#34;https://simperium.com&#34;&gt;Simperium&lt;/a&gt; to sync notes across Android, iOS, Mac, and of course Ubuntu (and other Linux systems). It has support for instant search, tags, note sharing, backups, and best of all it is free. This makes Simplenote a great choice if, like me, you use several systems on a daily basis.&lt;/p&gt;
+
+&lt;p&gt;Snapping Simplenote is relatively straight-forward but as I walk through the process below there are a few concepts that could help others snap applications. The rest of this post assumes you are using an Ubuntu 16.04-based system (VM, PC) and have installed snapcraft as per the instructions on the GitHub page.&lt;/p&gt;
+
+&lt;h2 id=&#34;snapcraft:4408236ccc10409f19576a02bb19af53&#34;&gt;Snapcraft&lt;/h2&gt;
+
+&lt;p&gt;First we need to get the latest version of Simplenote from GitHub, at time of writing this was 1.0.1.&lt;/p&gt;
+
+&lt;pre&gt;
+  wget https://github.com/Automattic/simplenote-electron/releases/download/v1.0.1/Simplenote-linux-x64.1.0.1.tar.gz
+  tar xvzf Simplenote-linux-x64.1.0.1.tar.gz
+&lt;/pre&gt;
+
+&lt;p&gt;Then we need to create our initial &lt;code&gt;snapcraft.yaml&lt;/code&gt; file in the Simplenote directory to tell Snapcraft how to package the application.&lt;/p&gt;
+
+&lt;pre&gt;
+  cd Simplenote-linux-x64
+  snapcraft init
+&lt;/pre&gt;
+
+&lt;p&gt;Running &lt;code&gt;snapcraft init&lt;/code&gt; creates a barebones file ready for editing. For Simplenote you need the following, don’t worry about the contents just yet, I will point out the important bits soon.&lt;/p&gt;
+
+&lt;pre&gt;
+name: simplenote
+version: 1.0.1
+summary: The simplest way to keep notes.
+description: The simplest way to keep notes. Light, clean, and free.
+apps:
+  simplenote:
+    command: wrapper
+    plugs: [unity7, opengl, network]
+parts:
+  simplenote:
+    plugin: copy
+    stage-packages:
+      - libnss3
+      - fontconfig-config
+      - gnome-themes-standard
+    files:
+      Simplenote: Simplenote
+      wrapper: usr/bin/wrapper
+      icudtl.dat: icudtl.dat
+      snapshot_blob.bin: snapshot_blob.bin
+      natives_blob.bin: natives_blob.bin
+      resources*: resources
+      libnode.so: usr/lib/x86_64-linux-gnu/libnode.so
+      libffmpeg.so: usr/lib/x86_64-linux-gnu/libffmpeg.so
+&lt;/pre&gt;
+
+&lt;p&gt;The first 4 lines of the file are there to describe details about the package itself including the name, version number, and a plain text summary and description. After that we get on to the sections that describe how the application is executed and what features it needs from the underlying system. &lt;code&gt;command&lt;/code&gt; is the command to run on execution and &lt;code&gt;plugs&lt;/code&gt; tells the system that this application wants to use the &lt;code&gt;unity7&lt;/code&gt;, &lt;code&gt;opengl&lt;/code&gt;, and &lt;code&gt;network&lt;/code&gt; interfaces - all mandatory for Simplenote. You can read more about interfaces in Zygmunt’s series of &lt;a href=&#34;http://www.zygoon.pl/2016/04/snappy-snapcraft-and-interfaces.html&#34;&gt;interface articles&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a side note, the command entry is a little different for this application as Simplenote (and other Electron-based apps) need a few environment variables set up before the actual binary can be called. This is accomplished by creating a wrapper script that does this set up. The contents of the wrapper file can be seen later in this post.&lt;/p&gt;
+
+&lt;p&gt;Back to the &lt;code&gt;snapcraft.yaml&lt;/code&gt; file. The &lt;code&gt;parts&lt;/code&gt; section describes what Snapcraft needs to do when creating the the &lt;code&gt;.snap&lt;/code&gt; package. In this case we rely on the &lt;code&gt;copy&lt;/code&gt; plugin that enables, you guessed it, copying of files from the host system during packaging to the snap package. The actual files to copy are listed in the &lt;code&gt;files&lt;/code&gt; section. This copying is done to ensure that Simplenote has all the libraries and binary blobs necessary to execute once mounted within it’s snap-based confined area, running on a Snappy system. The format is:&lt;/p&gt;
+
+&lt;pre&gt;file_to_copy: destination_in_the_snap&lt;/pre&gt;
+
+&lt;p&gt;One entry that sticks out a little is the resources line:&lt;/p&gt;
+
+&lt;pre&gt;resources*: resources&lt;/pre&gt;
+
+&lt;p&gt;The use of the globbing wildcard ‘&lt;code&gt;*&lt;/code&gt;’ ensures that the whole resources directory is copied across.&lt;/p&gt;
+
+&lt;p&gt;One section we skipped over was &lt;code&gt;stage-packages&lt;/code&gt;. Snapcraft is a very clever tool and we benefit from it’s knowledge of Debian-based packages by stating in this section that we want to install &lt;code&gt;libnss3&lt;/code&gt;, &lt;code&gt;fontconfig-config&lt;/code&gt;, and &lt;code&gt;gnome-themes-standard&lt;/code&gt; from the Ubuntu archive into the snap; again these are required packages for Simplenote.&lt;/p&gt;
+
+&lt;p&gt;Another side note. To understand what libraries are required by a binary like Simplenote we can use the ldd command:&lt;/p&gt;
+
+&lt;pre&gt;ldd Simplenote&lt;/pre&gt;
+
+&lt;p&gt;This produces an output that can be studied to understand where the binary is looking for its dependencies. Simplenote comes with a couple of libraries embedded in the package, namely &lt;code&gt;libnode.so&lt;/code&gt; and &lt;code&gt;libffmpeg.so&lt;/code&gt; and ldd shows these on my system as:&lt;/p&gt;
+
+&lt;pre&gt;
+libnode.so =&gt; /home/jamie/snapping/simplenote/Simplenote-linux-x64/./libnode.so (0x00007fa6caa85000)
+libffmpeg.so =&gt; /home/jamie/snapping/simplenote/Simplenote-linux-x64/./libffmpeg.so (0x00007fa6c5801000)
+&lt;/pre&gt;
+
+&lt;p&gt;Notice that the entry after ‘&lt;code&gt;=&amp;gt;&lt;/code&gt;’ points to local .so files in the &lt;code&gt;Simplenote-linux-x64&lt;/code&gt; directory, this means that we need to copy these over into the snap, hence the &lt;code&gt;copy&lt;/code&gt; entry in the &lt;code&gt;snapcraft.yaml&lt;/code&gt; file. All other libraries are present on the host system and will be used automatically by Snapcraft.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-code-wrapper-code-file:4408236ccc10409f19576a02bb19af53&#34;&gt;The &lt;code&gt;wrapper&lt;/code&gt; file&lt;/h2&gt;
+
+&lt;p&gt;The contents of the wrapper file discussed above are:&lt;/p&gt;
+
+&lt;pre&gt;
+#!/bin/sh
+export FONTCONFIG_PATH=$SNAP/etc/fonts
+export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
+export XDG_DATA_HOME=$SNAP/usr/share
+export LD_LIBRARY_PATH=$SNAP_LIBRARY_PATH:$SNAP/usr/lib/x86_64-linux-gnu/
+exec &#34;$SNAP/Simplenote&#34; &#34;$@&#34;
+&lt;/pre&gt;
+
+&lt;p&gt;There is nothing too exciting about this file, we set up the fonts path to be inside the snap directory itself (remember snaps are confined) as well as the share folder. We also set the &lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt; to ensure that the snap is looking for it’s libraries in the right location, namely &lt;code&gt;$SNAP/usr/lib/x86_64-linux-gnu/&lt;/code&gt;. Again, looking at the &lt;code&gt;snapcraft.yaml&lt;/code&gt; file you can see that we copy &lt;code&gt;libnode.so&lt;/code&gt; and &lt;code&gt;libffmpeg.so&lt;/code&gt; here to ensure Simplenote does not complain about missing libs. The last line executes the Simplenote binary.&lt;/p&gt;
+
+&lt;p&gt;The wrapper file needs to be executable so we do this using the chmod command:&lt;/p&gt;
+
+&lt;pre&gt;
+  chmod +x wrapper
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;building-and-installing:4408236ccc10409f19576a02bb19af53&#34;&gt;Building and Installing&lt;/h2&gt;
+
+&lt;p&gt;All that is left to do is build and install the snap.&lt;/p&gt;
+
+&lt;pre&gt;
+  snapcraft
+  sudo snap install simplenote_1.0.1_amd64.snap
+&lt;/pre&gt;
+
+&lt;p&gt;This process will pull down any dependencies and create the squashfs-based &lt;code&gt;.snap&lt;/code&gt; file. After this we should have a &lt;code&gt;simplenote_1.0.1_amd64.snap&lt;/code&gt; file in the local directory ready to be installed with the &lt;code&gt;snap install&lt;/code&gt; command. One caveat at the moment is that Simplenote will expect to use &lt;code&gt;dbus&lt;/code&gt; and with AppArmor confinement this is not possible with the application we just built. It is possible to get around this but I will leave that as an exercise for a later post.&lt;/p&gt;
+
+&lt;p&gt;If you try to run the application using:&lt;/p&gt;
+
+&lt;pre&gt;
+  simplenote
+&lt;/pre&gt;
+
+&lt;p&gt;You will see the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img align=“center” src=&#34;http://www.linuxuk.org/media/simplenote_apparmor_error.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;What we can do, which introduces a new concept nicely, is use &lt;code&gt;—devmode&lt;/code&gt;. devmode allows the snap to break out of it’s confinement during development to quickly get up and running. From there you can look at what policy violations would potentially occur and adjust your application accordingly. When you are happy that your application is working in a confined environment you can simply install without devmode to test.&lt;/p&gt;
+
+&lt;p&gt;To install Simplenote with devmode you can use the &lt;code&gt;—devmode&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;
+  sudo snap install —devmode simplenote_1.0.1.snap
+&lt;/pre&gt;
+
+&lt;p&gt;Running &lt;code&gt;simplenote&lt;/code&gt; now produces the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img align=“centre” src=&#34;http://www.linuxuk.org/media/simplenote_login.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;It is not perfect but that wasn’t the aim of this post. Instead we looked at packaging an application, copying files inside the snap using &lt;code&gt;copy&lt;/code&gt;, using a wrapper file to set up a snap environment, and now to conclude lets introduce another little snippet of information to help you debug your snapping process: &lt;code&gt;busybox&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;debugging-snaps-using-code-busybox-code:4408236ccc10409f19576a02bb19af53&#34;&gt;Debugging snaps using &lt;code&gt;busybox&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;Snapping an application is usually pretty simple but when you get stuck and just need to look inside the snap itself to see what is going on there is a simple trick to allow you to do this. Adding &lt;code&gt;busybox&lt;/code&gt; as an application to your snap gives you to have a shell environment right there in the snap. This allows you to poke and prod at directories, seeing if files you thought you copied over are present, and generally debugging (you can also add &lt;code&gt;gdb&lt;/code&gt; and other tools if necessary in the same way).&lt;/p&gt;
+
+&lt;p&gt;To add &lt;code&gt;busybox&lt;/code&gt; we would modify the &lt;code&gt;snapcraft.yaml&lt;/code&gt; file above as follows:&lt;/p&gt;
+
+&lt;pre&gt;
+name: simplenote
+version: 1.0.1
+summary: The simplest way to keep notes.
+description: The simplest way to keep notes. Light, clean, and free.
+apps:
+  simplenote:
+    command: wrapper
+    plugs: [unity7, opengl, network]
+  busy box:
+    command: sh
+    plugs: [unity7, opengl, network]
+parts:
+  simplenote:
+    plugin: copy
+    stage-packages:
+      - libnss3
+      - fontconfig-config
+      - gnome-themes-standard
+    files:
+      Simplenote: Simplenote
+      wrapper: usr/bin/wrapper
+  busybox:
+    plugin: nil
+    stage-packages:
+      - busybox
+&lt;/pre&gt;
+
+&lt;p&gt;Notice the extra busybox-related lines. To access &lt;code&gt;busybox&lt;/code&gt; once the snap is installed you can use:&lt;/p&gt;
+
+&lt;pre&gt;
+  simplenote.busybox
+&lt;/pre&gt;
+
+&lt;p&gt;Important directories are:
+&lt;pre&gt;
+$SNAP - the snaps home directory i.e. /snap/simplenote/id
+$SNAP_DATA - the snaps data directory in var i.e. /var/snap/simplenote/id
+$SNAP_USER_DATA - the snaps user data directory i.e. /home/jamie/snap/simplenote/id
+&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;All of the above directories are on a Classic 16.04 Ubuntu system.&lt;/p&gt;
+
+&lt;p&gt;All code can be found at:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/jamiedbennett/snaps/tree/master/simplenote&#34;&gt;https://github.com/jamiedbennett/snaps/tree/master/simplenote&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The next steps for this application are to sort out the fonts and menu spacing, add a &lt;code&gt;.desktop&lt;/code&gt; file for dash discovery, get around the AppArmor violation, and upload to the store, but all of this is for another post.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Change of Scenery</title>
+      <link>http://www.linuxuk.org/post/20160404-a-change-of-scenery/</link>
+      <pubDate>Wed, 06 Apr 2016 20:59:00 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20160404-a-change-of-scenery/</guid>
+      <description>&lt;p&gt;A few weeks I joined &lt;a href=&#34;http://www.canonical.com&#34;&gt;Canonical&lt;/a&gt; and for the eagle-eyed you&amp;rsquo;d realise this is actually for the second time. Previously at Canonical I spent my days with the Mobile Team, realising the goal of a good Linux on ARM experience which eventually culminated in the foundation of &lt;a href=&#34;http://www.linaro.org&#34;&gt;Linaro&lt;/a&gt;. This time I am equally excited about another formative stage of technology, that of IoT and the possibilities of interoperable and extensible devices running a standard Linux operating system.&lt;/p&gt;
+
+&lt;p&gt;I personally will be working directly on Snappy Core, the technology used to provide a stable, secure, transactional, and featureful platform for the internet of things (IoT) and beyond. I believe in the future of IoT, big data, and a world full of Mark Weiser&amp;rsquo;s vision of &lt;a href=&#34;http://www.ubiq.com/hypertext/weiser/UbiHome.html&#34;&gt;Ubiquitous Computing&lt;/a&gt; and I am excited to be part of it.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

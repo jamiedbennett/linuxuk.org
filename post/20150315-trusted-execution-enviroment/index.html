@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> Trusted Execution Environments in Android &middot; LinuxUK </title>
+
+  
+  <link rel="stylesheet" href="http://www.linuxuk.org/css/poole.css">
+  <link rel="stylesheet" href="http://www.linuxuk.org/css/syntax.css">
+  <link rel="stylesheet" href="http://www.linuxuk.org/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="LinuxUK" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2301466-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+
+<div class="sidebar">
+	<div class="container sidebar">
+    <div class="sidebar-about">
+      <h1>LinuxUK</h1>
+      <p class="lead">
+      Adventures in Software Engineering, Running, Vegan cooking, and other randomness
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <a href="/">Home</a><br/> 
+	  <a href="/about">About</a><br/>
+	  <a href="/post">Archive</a><br/>
+    </ul>
+	<ul class="sidebar-social">
+      <li><a href="https://twitter.com/jamiebennett"><img src="/images/twitter.png" /></a></li>
+      <li><a href="https://uk.linkedin.com/in/jamiebennett"><img src="/images/linkedin.png" /></a></li>
+      <li><a href="https://github.com/jamiedbennett"><img src="/images/github.png" /></a></li>
+	  <li><a href="https://plus.google.com/u/0/&#43;JamieBennett09"><img src="/images/googleplus.png" /></a></li>
+  	</ul>
+
+    <ul class="sidebar-footnote">
+    	&copy; 2016 Jamie Bennett. All rights reserved.
+	</ul>
+
+  </div>
+</div>
+
+
+<div class="content container">
+<div class="post">
+  <h1>Trusted Execution Environments in Android</h1>
+  <span class="post-date">Sun, Mar 15, 2015</span>
+      <p>Continuing on from my post about TrustZone it seems that there is a lot of interest in hardware-backed security for Android and what you can do with it. One of the most interesting things that a hardware-isolated area can do for devices, whether that be a dedicated co-processor or technology such as TrustZone, is to provide a trusted enviroment dedicated to protecting your most valuable assets and the operations that are performed on them. Installing something like a micro operating system in this divide can give you a lot of features that the main OS just cannot gain access to and is the thrust of standards bodies such as Global Platform <sup class="footnote-ref" id="fnref:09138b7cb49189c181c90d2842c88c71:1"><a rel="footnote" href="#fn:09138b7cb49189c181c90d2842c88c71:1">1</a></sup>. This micro OS, or to use the popular parlance: a Trusted Execution Environment (TEE), is becoming more important in a world of one-click / swipe / wave-a-device payments and device authorisation and over the coming years will see a surge in popularity not only from independant vendors but from the large OS vendors too. But lets take a step back.</p>
+
+<p>The concept of a Trusted Execution Environment is to provide a secure area of the main processor, memory, and peripherals, that can be used to perform privileged operations. First defined by the Open Mobile Terminal Platform (OMTP) forum in their Advanced Trusted Environment:OMTP TR1 standard <sup class="footnote-ref" id="fnref:09138b7cb49189c181c90d2842c88c71:2"><a rel="footnote" href="#fn:09138b7cb49189c181c90d2842c88c71:2">2</a></sup> and later adopted by Global Platform in their standardisation effort, the TEE has become a bridge between pure software security mechanisms and hardware-only solutions. The TEE uses the concept of isolation that technologies such as TrustZone enable to execute in the processors Secure World mode.</p>
+
+<p>The TEE can be a fully-functional operating system offering software developers the opportunity to create Trusted Applications: applications that reside in the Secure World and perform security-critical functions outside of the control of the main operating system running in the Normal World. An example of such a Trusted Application can be a Trusted User Interface (TUI) - a display that is presented to the user completely protected by the Secure World and inaccessible to the main operating system such as Android. The interface could display sensitive information such as passwords and be confident that attacks such as screen scraping or video buffer capture would not reveal anything.</p>
+
+<p>It is clear that the popularity of TEEs is increasing. Based on one commercial TEE vendors press releases the adoption rate of the Trustonic TEE is reported to be over 100m devices every 6 months (source: <a href="http://www.trustonic.com">http://www.trustonic.com</a> - figures from February 2014 to July 2014) although wide-spread utilisation by third-party developers is yet to be exploited. Ekberg et al <sup class="footnote-ref" id="fnref:09138b7cb49189c181c90d2842c88c71:3"><a rel="footnote" href="#fn:09138b7cb49189c181c90d2842c88c71:3">3</a></sup> attribute this to a lack of access to the TEE stating that <strong><em>&ldquo;Despite TEE’s large-scale deployment, there’s been no widely available means for application developers to benefit from its functionality as mobile device manufacturers have restricted TEE access to their internal use cases.&rdquo;</em></strong>, but also admit that standardisation could potentially solve this issue. Recent announcements by companies such as Linaro point to a more open access model <sup class="footnote-ref" id="fnref:09138b7cb49189c181c90d2842c88c71:4"><a rel="footnote" href="#fn:09138b7cb49189c181c90d2842c88c71:4">4</a></sup> but we are yet to see commercial devices with OP-TEE technology.</p>
+
+<p>In short, TEEs are here to stay and I expect that the likes of Apple and Android will open up access to this trusted area for more developers to enhance the security of their applications in the near future.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:09138b7cb49189c181c90d2842c88c71:1"><a href="http://www.globalplatform.org">http://www.globalplatform.org</a>
+ <a class="footnote-return" href="#fnref:09138b7cb49189c181c90d2842c88c71:1"><sup>[return]</sup></a></li>
+<li id="fn:09138b7cb49189c181c90d2842c88c71:2"><a href="http://www.gsma.com/newsroom/wp-content/uploads/2012/03/omtpadvancedtrustedenvironmentomtptr1v11.pdf">http://www.gsma.com/newsroom/wp-content/uploads/2012/03/omtpadvancedtrustedenvironmentomtptr1v11.pdf</a>
+ <a class="footnote-return" href="#fnref:09138b7cb49189c181c90d2842c88c71:2"><sup>[return]</sup></a></li>
+<li id="fn:09138b7cb49189c181c90d2842c88c71:3">The Untapped Potential of Trusted Execution Environments on Mobile Devices - Ekberg, J.-E. and Kostiainen, K. and Asokan, N.
+ <a class="footnote-return" href="#fnref:09138b7cb49189c181c90d2842c88c71:3"><sup>[return]</sup></a></li>
+<li id="fn:09138b7cb49189c181c90d2842c88c71:4"><a href="https://www.linaro.org/blog/core-dump/op-tee-open-source-security-mass-market">https://www.linaro.org/blog/core-dump/op-tee-open-source-security-mass-market</a>
+ <a class="footnote-return" href="#fnref:09138b7cb49189c181c90d2842c88c71:4"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+	  <ul id="tags">
+		<h3>Tags: </h3>
+	    
+	      [<a href="/tags/development">Development</a>]
+	    
+	      [<a href="/tags/security">Security</a>]
+	    
+	      [<a href="/tags/android">Android</a>]
+	    
+	  </ul>
+</div>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+         
+        var disqus_shortname = 'linuxukorg'; 
+
+         
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </body>
+</html>

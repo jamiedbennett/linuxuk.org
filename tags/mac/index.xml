@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mac on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/mac/</link>
+    <description>Recent content in Mac on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Fri, 27 Mar 2015 09:23:34 +0000</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Creating bootable USB images on the Mac</title>
+      <link>http://www.linuxuk.org/post/20150327-creating-bootable-usb-images-on-mac/</link>
+      <pubDate>Fri, 27 Mar 2015 09:23:34 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20150327-creating-bootable-usb-images-on-mac/</guid>
+      <description>&lt;p&gt;Creating a bootable image for installing a Linux OS is pretty straight-forward but when you are doing this on the Mac there is a specific way it needs to be done. I alway use USB drives for this purpose so what follows are the steps needed to create a bootable USB stick from a Linux .iso image.&lt;/p&gt;
+
+&lt;p&gt;I presume you have already downloaded your favourate Linux distribution in .iso format, below I&amp;rsquo;m using Debian Jessie.&lt;/p&gt;
+
+&lt;p&gt;First conver the .iso image into a .img image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hdiutil convert -format UDRW -o debian-jessie-DI-rc1-amd64-netinst.img debian-jessie-DI-rc1-amd64-netinst.iso
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You then need to find your USB drive.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ diskutil list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Look for USB device. I&amp;rsquo;ll use /dev/disk7 for this example. First make sure it is unmounted.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ diskutil unmountDisk /dev/disk7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then copy the image to the USB stick. &lt;strong&gt;CAUTION&lt;/strong&gt; This will overwrite anything that is already on the drive.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo dd if=debian-jessie-DI-rc1-amd64-netinst.img.dmg of=/dev/disk7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Safely eject the USB disk before using it for booting on your target device.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ diskutil eject /dev/disk7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And there you have it, a bootable, Linux install USB drive.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

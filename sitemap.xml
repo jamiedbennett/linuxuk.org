@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://www.linuxuk.org/</loc>
+    <lastmod>2016-09-13T12:55:14+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/fixing_git_on_macOS_Sierra/</loc>
+    <lastmod>2016-09-13T12:55:14+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/cheddar_half_and_broadlands_10miler/</loc>
+    <lastmod>2016-07-01T20:44:42+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/snap_try/</loc>
+    <lastmod>2016-07-01T20:32:12+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/cross-distro-snaps/</loc>
+    <lastmod>2016-06-16T18:41:40+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/contributing_to_snapd/</loc>
+    <lastmod>2016-06-01T09:40:26+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20160518_snapping_electron_based_applications_simplenote/</loc>
+    <lastmod>2016-05-18T09:40:26+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20160424_pensford10k/</loc>
+    <lastmod>2016-04-24T21:13:10+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20160410_cheddar_gorge_10k/</loc>
+    <lastmod>2016-04-11T20:11:08+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20160404-a-change-of-scenery/</loc>
+    <lastmod>2016-04-06T20:59:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20160221_running_in_nepal/</loc>
+    <lastmod>2016-02-21T17:58:58+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20160123_parkrun/</loc>
+    <lastmod>2016-01-19T14:03:55+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20151230_scansnap1300i_ubuntu/</loc>
+    <lastmod>2015-12-30T21:35:27+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/2015-11-09_Running_Ubuntu_Snappy_On_OSX_VirtualBox/</loc>
+    <lastmod>2015-11-09T14:09:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20151106-ubuntu-snappy-with-mac/</loc>
+    <lastmod>2015-11-06T12:23:30+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20150819-life-with-apples-iwatch/</loc>
+    <lastmod>2015-08-19T19:41:08+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20150810-humans/</loc>
+    <lastmod>2015-08-10T20:06:44+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20150327-creating-bootable-usb-images-on-mac/</loc>
+    <lastmod>2015-03-27T09:23:34+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20150315-trusted-execution-enviroment/</loc>
+    <lastmod>2015-03-15T19:56:29+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20150226-what-are-you-passionate-about/</loc>
+    <lastmod>2015-02-26T22:00:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20150222-trustzone-for-mobile-security/</loc>
+    <lastmod>2015-02-22T17:13:52+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.linuxuk.org/post/20150218-more-blogging/</loc>
+    <lastmod>2015-02-18T10:18:26+00:00</lastmod>
+  </url>
+  
+</urlset>

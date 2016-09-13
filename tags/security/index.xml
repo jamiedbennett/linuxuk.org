@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/security/</link>
+    <description>Recent content in Security on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Sun, 15 Mar 2015 19:56:29 +0000</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Trusted Execution Environments in Android</title>
+      <link>http://www.linuxuk.org/post/20150315-trusted-execution-enviroment/</link>
+      <pubDate>Sun, 15 Mar 2015 19:56:29 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20150315-trusted-execution-enviroment/</guid>
+      <description>&lt;p&gt;Continuing on from my post about TrustZone it seems that there is a lot of interest in hardware-backed security for Android and what you can do with it. One of the most interesting things that a hardware-isolated area can do for devices, whether that be a dedicated co-processor or technology such as TrustZone, is to provide a trusted enviroment dedicated to protecting your most valuable assets and the operations that are performed on them. Installing something like a micro operating system in this divide can give you a lot of features that the main OS just cannot gain access to and is the thrust of standards bodies such as Global Platform &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:09138b7cb49189c181c90d2842c88c71:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:09138b7cb49189c181c90d2842c88c71:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. This micro OS, or to use the popular parlance: a Trusted Execution Environment (TEE), is becoming more important in a world of one-click / swipe / wave-a-device payments and device authorisation and over the coming years will see a surge in popularity not only from independant vendors but from the large OS vendors too. But lets take a step back.&lt;/p&gt;
+
+&lt;p&gt;The concept of a Trusted Execution Environment is to provide a secure area of the main processor, memory, and peripherals, that can be used to perform privileged operations. First defined by the Open Mobile Terminal Platform (OMTP) forum in their Advanced Trusted Environment:OMTP TR1 standard &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:09138b7cb49189c181c90d2842c88c71:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:09138b7cb49189c181c90d2842c88c71:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; and later adopted by Global Platform in their standardisation effort, the TEE has become a bridge between pure software security mechanisms and hardware-only solutions. The TEE uses the concept of isolation that technologies such as TrustZone enable to execute in the processors Secure World mode.&lt;/p&gt;
+
+&lt;p&gt;The TEE can be a fully-functional operating system offering software developers the opportunity to create Trusted Applications: applications that reside in the Secure World and perform security-critical functions outside of the control of the main operating system running in the Normal World. An example of such a Trusted Application can be a Trusted User Interface (TUI) - a display that is presented to the user completely protected by the Secure World and inaccessible to the main operating system such as Android. The interface could display sensitive information such as passwords and be confident that attacks such as screen scraping or video buffer capture would not reveal anything.&lt;/p&gt;
+
+&lt;p&gt;It is clear that the popularity of TEEs is increasing. Based on one commercial TEE vendors press releases the adoption rate of the Trustonic TEE is reported to be over 100m devices every 6 months (source: &lt;a href=&#34;http://www.trustonic.com&#34;&gt;http://www.trustonic.com&lt;/a&gt; - figures from February 2014 to July 2014) although wide-spread utilisation by third-party developers is yet to be exploited. Ekberg et al &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:09138b7cb49189c181c90d2842c88c71:3&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:09138b7cb49189c181c90d2842c88c71:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; attribute this to a lack of access to the TEE stating that &lt;strong&gt;&lt;em&gt;&amp;ldquo;Despite TEE’s large-scale deployment, there’s been no widely available means for application developers to benefit from its functionality as mobile device manufacturers have restricted TEE access to their internal use cases.&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;, but also admit that standardisation could potentially solve this issue. Recent announcements by companies such as Linaro point to a more open access model &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:09138b7cb49189c181c90d2842c88c71:4&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:09138b7cb49189c181c90d2842c88c71:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; but we are yet to see commercial devices with OP-TEE technology.&lt;/p&gt;
+
+&lt;p&gt;In short, TEEs are here to stay and I expect that the likes of Apple and Android will open up access to this trusted area for more developers to enhance the security of their applications in the near future.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:09138b7cb49189c181c90d2842c88c71:1&#34;&gt;&lt;a href=&#34;http://www.globalplatform.org&#34;&gt;http://www.globalplatform.org&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:09138b7cb49189c181c90d2842c88c71:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:09138b7cb49189c181c90d2842c88c71:2&#34;&gt;&lt;a href=&#34;http://www.gsma.com/newsroom/wp-content/uploads/2012/03/omtpadvancedtrustedenvironmentomtptr1v11.pdf&#34;&gt;http://www.gsma.com/newsroom/wp-content/uploads/2012/03/omtpadvancedtrustedenvironmentomtptr1v11.pdf&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:09138b7cb49189c181c90d2842c88c71:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:09138b7cb49189c181c90d2842c88c71:3&#34;&gt;The Untapped Potential of Trusted Execution Environments on Mobile Devices - Ekberg, J.-E. and Kostiainen, K. and Asokan, N.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:09138b7cb49189c181c90d2842c88c71:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:09138b7cb49189c181c90d2842c88c71:4&#34;&gt;&lt;a href=&#34;https://www.linaro.org/blog/core-dump/op-tee-open-source-security-mass-market&#34;&gt;https://www.linaro.org/blog/core-dump/op-tee-open-source-security-mass-market&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:09138b7cb49189c181c90d2842c88c71:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TrustZone For Android Mobile Security</title>
+      <link>http://www.linuxuk.org/post/20150222-trustzone-for-mobile-security/</link>
+      <pubDate>Sun, 22 Feb 2015 17:13:52 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20150222-trustzone-for-mobile-security/</guid>
+      <description>&lt;p&gt;Recently I was asked to provide a quick, high-level introduction to TrustZone and how it could potentially improve the security on Android platforms. Any response to this is tricky: TrustZone is just a mechanism built in to a platform that if unused can do very little for device security but when utilised to its fullest, can create a totally seperate environment dedicated to protecting your most important secrets. But first a bit of background.&lt;/p&gt;
+
+&lt;p&gt;According to Bloomberg &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3f08e644941c4bb5b66972dfd4787c48:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3f08e644941c4bb5b66972dfd4787c48:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; ARM&amp;rsquo;s chip designs are found in 99% of the world&amp;rsquo;s smartphones and tablets; 2013 alone saw ARM&amp;rsquo;s partners ship over 10 billion chips (source: ARM Strategic Report 2013). Popular devices such as the Apple iPhone and iPad, Amazon&amp;rsquo;s Kindle, and Samsung&amp;rsquo;s flagship Galaxy series all use a Central Processing Unit (CPU) based on an ARM design. In 2004 ARM released its design for a hardware-enforced parallel execution environment for the PB1176 and ARMv7 architectures that was adopted into all later application processor designs.&lt;/p&gt;
+
+&lt;p&gt;TrustZone itself is an implementation of device-level security utilizing extensions to the CPU and Advanced Microcontroller Bus Architecture (AMBA), or memory bus. By connecting all these components together in a homogeneous architecture it is possible to contruct two distinct &amp;lsquo;worlds&amp;rsquo;, a &amp;ldquo;&lt;em&gt;Secure World&lt;/em&gt;&amp;rdquo; and a &amp;ldquo;&lt;em&gt;Non-Secure World&lt;/em&gt;&amp;rdquo; (or &amp;ldquo;&lt;em&gt;Normal World&lt;/em&gt;&amp;rdquo;) &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3f08e644941c4bb5b66972dfd4787c48:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3f08e644941c4bb5b66972dfd4787c48:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;. The two modes are orthogonal to each other with the Secure World enjoying full access to all memory regions and priviledged CPU areas whereas the Normal World can be restricted. This arrangement is configured during the boot process. The interface between the two worlds is governed by a special Secure Monitor Mode, accessible via an interrupt instigated with the Secure Monitor Call (SMC) instruction. Identification of which world the processor is currently executing it is possible by the use of a extra &amp;lsquo;flag&amp;rsquo; known as the NS, or Non-Secure bit. All components that wish to use the functionality provided by TrustZone must beaware of this flag.&lt;/p&gt;
+
+&lt;p&gt;With TrustZone it is possible to isolate an area of the CPU, memory, and peripherals for use by a trusted software component called a Trusted Execution (TEE) &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3f08e644941c4bb5b66972dfd4787c48:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:3f08e644941c4bb5b66972dfd4787c48:2&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; or other such privileged software. For example, Android&amp;rsquo;s implementation of the core crytographical keystore functionality, &lt;a href=&#34;http://developer.android.com/reference/android/security/KeyChain.html&#34;&gt;KeyChain&lt;/a&gt;, can use hardware components such as TrustZone, Sim Card, or Trusted Platform Module (TPM), to enhance overall security. By using TrustZone a device can provice secure software functionalty, backed up by the hardware it is running on.&lt;/p&gt;
+
+&lt;p&gt;It is clear that with more widespread use TrustZone could benefit an increasingly mobile society who expect to do the most secure of operations with their devices.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:3f08e644941c4bb5b66972dfd4787c48:1&#34;&gt;&lt;a href=&#34;http://www.bloomberg.com/bw/articles/2014-02-04/arm-chips-are-the-most-used-consumer-product-dot-where-s-the-money]&#34;&gt;http://www.bloomberg.com/bw/articles/2014-02-04/arm-chips-are-the-most-used-consumer-product-dot-where-s-the-money]&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3f08e644941c4bb5b66972dfd4787c48:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3f08e644941c4bb5b66972dfd4787c48:2&#34;&gt;J. Winter. Trusted computing building blocks for embedded linux-based arm trust- zone platforms. In Proceedings of the 3rd ACM workshop on Scalable trusted com- puting, pages 21–30. ACM, 2008.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3f08e644941c4bb5b66972dfd4787c48:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3f08e644941c4bb5b66972dfd4787c48:2&#34;&gt;J. Winter. Trusted computing building blocks for embedded linux-based arm trust- zone platforms. In Proceedings of the 3rd ACM workshop on Scalable trusted com- puting, pages 21–30. ACM, 2008.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3f08e644941c4bb5b66972dfd4787c48:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

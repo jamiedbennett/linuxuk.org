@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rasberry Pi2 on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/rasberry-pi2/</link>
+    <description>Recent content in Rasberry Pi2 on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Fri, 06 Nov 2015 12:23:30 +0000</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/rasberry-pi2/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Installing Ubuntu Snappy Core on a Rasberry Pi 2 using a Mac</title>
+      <link>http://www.linuxuk.org/post/20151106-ubuntu-snappy-with-mac/</link>
+      <pubDate>Fri, 06 Nov 2015 12:23:30 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20151106-ubuntu-snappy-with-mac/</guid>
+      <description>&lt;p&gt;This is a short guide to installing Ubuntu Snappy Core on a Rasberry Pi 2 using a Mac. It is pretty straight-forward but there are a couple of areas where you can get caught out.&lt;/p&gt;
+
+&lt;p&gt;First, download the Ubuntu Snappy image from:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://people.canonical.com/%7Eplatform/snappy/raspberrypi2/&#34;&gt;http://people.canonical.com/%7Eplatform/snappy/raspberrypi2/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As of writing the latest release was:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ubuntu-15.04-snappy-armhf-rpi2.img.xz&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Insert your SD card if you haven&amp;rsquo;t done so already and use &lt;strong&gt;diskutil&lt;/strong&gt; to find it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ diskutil list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure you are confident that you know exact which disk is your SD card before proceeding. The relevant part of my output was:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/dev/disk4 (external, physical):
+#:                       TYPE NAME                    SIZE       IDENTIFIER
+0:     FDisk_partition_scheme                        31.9 GB     disk4
+1:                  Windows_FAT_32 Untitled          31.9 GB     disk4s1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Umount the disk with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;diskutil unmountDisk /dev/disk4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then proceed to write your Ubuntu image to the card with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ unxz -c ubuntu-15.04-snappy-armhf-rpi2.img.xz | sudo dd of=/dev/rdisk4 bs=32m &amp;amp;&amp;amp; sync
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice the use of &amp;lsquo;r&amp;rsquo; in front of the /dev/disk4 file.&lt;/p&gt;
+
+&lt;p&gt;Thats all there is to it. Pop the SD card into your Rasberry Pi 2 and start using Ubuntu Snappy Core.&lt;/p&gt;
+
+&lt;div align=&#34;center&#34;&gt;
+&lt;img src=&#34;http://www.linuxuk.org/media/rpi2.jpg&#34; title=&#34;Rasberry Pi 2&#34;&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tip on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/tip/</link>
+    <description>Recent content in Tip on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Tue, 13 Sep 2016 12:55:14 +0100</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/tip/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fixing Git on MacOS X Sierra</title>
+      <link>http://www.linuxuk.org/post/fixing_git_on_macOS_Sierra/</link>
+      <pubDate>Tue, 13 Sep 2016 12:55:14 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/fixing_git_on_macOS_Sierra/</guid>
+      <description>&lt;p&gt;If, like me you have upgraded to the Mac OS X Sierra beta you may find that Git is broken from the command line. The error I was seeing was:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;It turns out that the developer tools are borked on upgrade so need reinstalling. To do that you need to run:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+xcode-select &amp;ndash;install
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;After a short download and installation everything should be back to normal.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

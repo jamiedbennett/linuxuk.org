@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on LinuxUK</title>
+    <link>http://www.linuxuk.org/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on LinuxUK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Jamie Bennett</copyright>
+    <lastBuildDate>Wed, 06 Apr 2016 20:59:00 +0100</lastBuildDate>
+    <atom:link href="http://www.linuxuk.org/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A Change of Scenery</title>
+      <link>http://www.linuxuk.org/post/20160404-a-change-of-scenery/</link>
+      <pubDate>Wed, 06 Apr 2016 20:59:00 +0100</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20160404-a-change-of-scenery/</guid>
+      <description>&lt;p&gt;A few weeks I joined &lt;a href=&#34;http://www.canonical.com&#34;&gt;Canonical&lt;/a&gt; and for the eagle-eyed you&amp;rsquo;d realise this is actually for the second time. Previously at Canonical I spent my days with the Mobile Team, realising the goal of a good Linux on ARM experience which eventually culminated in the foundation of &lt;a href=&#34;http://www.linaro.org&#34;&gt;Linaro&lt;/a&gt;. This time I am equally excited about another formative stage of technology, that of IoT and the possibilities of interoperable and extensible devices running a standard Linux operating system.&lt;/p&gt;
+
+&lt;p&gt;I personally will be working directly on Snappy Core, the technology used to provide a stable, secure, transactional, and featureful platform for the internet of things (IoT) and beyond. I believe in the future of IoT, big data, and a world full of Mark Weiser&amp;rsquo;s vision of &lt;a href=&#34;http://www.ubiq.com/hypertext/weiser/UbiHome.html&#34;&gt;Ubiquitous Computing&lt;/a&gt; and I am excited to be part of it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fujitsu SnapScan 1300i with Ubuntu</title>
+      <link>http://www.linuxuk.org/post/20151230_scansnap1300i_ubuntu/</link>
+      <pubDate>Wed, 30 Dec 2015 21:35:27 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20151230_scansnap1300i_ubuntu/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using the &lt;a href=&#34;http://www.fujitsu.com/uk/products/computing/peripheral/scanners/scansnap/s1300i/&#34;&gt;Fujitsu ScanSnap 1300i&lt;/a&gt; on Mac OS X for some time now in the pursuit of a paperless life but now that I am using Ubuntu more and more it was apparent that I was going to have to get this little scanner working on Linux. Searching the internet threw up a few interesting articles but nothing worked 100%. In the end the steps I used under Ubuntu 15.10 were:&lt;/p&gt;
+
+&lt;p&gt;Install &lt;strong&gt;&lt;em&gt;sane&lt;/em&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;gscan2pdf&lt;/em&gt;&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install sane gscan2pdf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Download the scanner firmware from &lt;a href=&#34;http://www.openfusion.net/public/files/1300i_0D12.nal&#34;&gt;http://www.openfusion.net/public/files/1300i_0D12.nal&lt;/a&gt; copy it to the relevant directory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ wget http://www.openfusion.net/public/files/1300i_0D12.nal &amp;amp;&amp;amp; sudo mkdir /usr/share/sane/epjitsu &amp;amp;&amp;amp; sudo cp 1300i_0D12.nal /usr/share/sane/epjitsu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Open up the scanner lid first then initialise it with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo scanimage -L
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run the gscan2pdf application:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gscan2pdf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can tweak some of the scanner options by clicking the scan button and playing around with the pop-up box tabs. For me the most important were to select duplex as I regularly scan double-sided documents and to select colour.&lt;/p&gt;
+
+&lt;p&gt;Happy scanning.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Running Ubuntu Snappy Core Virtualised on Mac OSX</title>
+      <link>http://www.linuxuk.org/post/2015-11-09_Running_Ubuntu_Snappy_On_OSX_VirtualBox/</link>
+      <pubDate>Mon, 09 Nov 2015 14:09:32 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/2015-11-09_Running_Ubuntu_Snappy_On_OSX_VirtualBox/</guid>
+      <description>&lt;p&gt;Although most of the documentation out there today shows you how to run Ubuntu Snappy Core on an Ubuntu desktop, it is also pretty simple to do this on Mac OSX. In short:&lt;/p&gt;
+
+&lt;p&gt;Download the Ubuntu Snappy Core image from:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://releases.ubuntu.com/15.04/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will need the amd64 version of Snappy.&lt;/p&gt;
+
+&lt;p&gt;Unarchive the file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;unxz ubuntu-15.04-snappy-amd64-generic.img.xz 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then convert the image into something that VirtualBox can run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;qemu-img convert -f raw -O vmdk ubuntu-15.04-snappy-amd64-generic.img ubuntu-15.04-snappy-amd64-rpi2.vmdk
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point you want to create a new VM with VirtualBox. Make sure you create a Linux Ubuntu image but when you get to the Hard drive section select &amp;ldquo;Use an existing virtual hard drive file&amp;rdquo;. Navigate to your .vmdk image and click create. Now, when you start the VM you should be greated (pretty quickly) with the login prompt from Snappy.&lt;/p&gt;
+
+&lt;div align=&#34;center&#34;&gt;
+&lt;img src=&#34;http://www.linuxuk.org/media/virtualbox.jpg&#34; title=&#34;VirtualBox&#34;&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installing Ubuntu Snappy Core on a Rasberry Pi 2 using a Mac</title>
+      <link>http://www.linuxuk.org/post/20151106-ubuntu-snappy-with-mac/</link>
+      <pubDate>Fri, 06 Nov 2015 12:23:30 +0000</pubDate>
+      
+      <guid>http://www.linuxuk.org/post/20151106-ubuntu-snappy-with-mac/</guid>
+      <description>&lt;p&gt;This is a short guide to installing Ubuntu Snappy Core on a Rasberry Pi 2 using a Mac. It is pretty straight-forward but there are a couple of areas where you can get caught out.&lt;/p&gt;
+
+&lt;p&gt;First, download the Ubuntu Snappy image from:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://people.canonical.com/%7Eplatform/snappy/raspberrypi2/&#34;&gt;http://people.canonical.com/%7Eplatform/snappy/raspberrypi2/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As of writing the latest release was:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ubuntu-15.04-snappy-armhf-rpi2.img.xz&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Insert your SD card if you haven&amp;rsquo;t done so already and use &lt;strong&gt;diskutil&lt;/strong&gt; to find it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ diskutil list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure you are confident that you know exact which disk is your SD card before proceeding. The relevant part of my output was:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/dev/disk4 (external, physical):
+#:                       TYPE NAME                    SIZE       IDENTIFIER
+0:     FDisk_partition_scheme                        31.9 GB     disk4
+1:                  Windows_FAT_32 Untitled          31.9 GB     disk4s1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Umount the disk with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;diskutil unmountDisk /dev/disk4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then proceed to write your Ubuntu image to the card with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ unxz -c ubuntu-15.04-snappy-armhf-rpi2.img.xz | sudo dd of=/dev/rdisk4 bs=32m &amp;amp;&amp;amp; sync
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice the use of &amp;lsquo;r&amp;rsquo; in front of the /dev/disk4 file.&lt;/p&gt;
+
+&lt;p&gt;Thats all there is to it. Pop the SD card into your Rasberry Pi 2 and start using Ubuntu Snappy Core.&lt;/p&gt;
+
+&lt;div align=&#34;center&#34;&gt;
+&lt;img src=&#34;http://www.linuxuk.org/media/rpi2.jpg&#34; title=&#34;Rasberry Pi 2&#34;&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

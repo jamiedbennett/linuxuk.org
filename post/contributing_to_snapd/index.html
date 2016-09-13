@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> Contributing to the snapd project &middot; LinuxUK </title>
+
+  
+  <link rel="stylesheet" href="http://www.linuxuk.org/css/poole.css">
+  <link rel="stylesheet" href="http://www.linuxuk.org/css/syntax.css">
+  <link rel="stylesheet" href="http://www.linuxuk.org/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="LinuxUK" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2301466-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+
+<div class="sidebar">
+	<div class="container sidebar">
+    <div class="sidebar-about">
+      <h1>LinuxUK</h1>
+      <p class="lead">
+      Adventures in Software Engineering, Running, Vegan cooking, and other randomness
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <a href="/">Home</a><br/> 
+	  <a href="/about">About</a><br/>
+	  <a href="/post">Archive</a><br/>
+    </ul>
+	<ul class="sidebar-social">
+      <li><a href="https://twitter.com/jamiebennett"><img src="/images/twitter.png" /></a></li>
+      <li><a href="https://uk.linkedin.com/in/jamiebennett"><img src="/images/linkedin.png" /></a></li>
+      <li><a href="https://github.com/jamiedbennett"><img src="/images/github.png" /></a></li>
+	  <li><a href="https://plus.google.com/u/0/&#43;JamieBennett09"><img src="/images/googleplus.png" /></a></li>
+  	</ul>
+
+    <ul class="sidebar-footnote">
+    	&copy; 2016 Jamie Bennett. All rights reserved.
+	</ul>
+
+  </div>
+</div>
+
+
+<div class="content container">
+<div class="post">
+  <h1>Contributing to the snapd project</h1>
+  <span class="post-date">Wed, Jun 1, 2016</span>
+      
+
+<p><img align=“center” src="/media/desktop.png"></p>
+
+<p>There is a lot of buzz around snaps, the new packaging format created by Canonical to enable secure, transactional, and robust application updates, and rightly so. This new method of distributing applications is revolutionizing not only software on IoT devices, but on the desktop, server, and beyond. The software that actually runs the snap applications is called <code>snapd</code>. Hosted on <a href="https://github.com/snapcore/snapd">GitHub</a>, <code>snapd</code> uses the <a href="https://golang.org">Go language</a> and is actively developed by a core set of developers, but, like most projects at Canonical, we actively encourage as much community participation as possible. One of the core developers, Zygmunt, posted a great outline on <a href="http://www.zygoon.pl/2016/06/making-your-first-contribution-to-snapd.html">how to make your first contribution to snapd</a> and, taking up the challenge, I did exactly that.</p>
+
+<p>Zygmunt&rsquo;s instructions are pretty clear but I thought I would look at this from a new developer&rsquo;s perspective, using a clean Ubuntu 16.04 install and with a new GitHub account. What follows is a guide to setting everything up ready for your first contribution. As a side note I have various machines I work on regularly, mainly my Lenovo laptop running Ubuntu, but also my Macbook Pro, and a HP Windows all-in-one. This allows me to look at the various platforms available to developers all of which are valid options for software development, especially in the IoT world.</p>
+
+<h2 id="installing-ubuntu-16-04:fe302d14b47fc72325260d8f135290c5">Installing Ubuntu 16.04</h2>
+
+<p>Installing Ubuntu is very straight-forward and, depending on the way you intend to run it, the instructions vary ever-so-slightly. There is a comprehensive guide to installing Ubuntu as the only OS available on the <a href="http://www.ubuntu.com/download/desktop/install-ubuntu-desktop">Ubuntu Site</a> which will get you up and running in no time. Remember to download Ubuntu 16.04. On the Mac and Windows platform you will need to install Ubuntu as a Virtual Machine (VM) but again, this is straight-forward. I chose to use <a href="https://www.virtualbox.org">VirtualBox</a> as it is free, feature-rich, and runs Ubuntu great; download it from the <a href="https://www.virtualbox.org/wiki/Downloads">website</a>. The Ubuntu Community is great when it comes to sharing information and there are already many tutorials on how to get an Ubuntu VM working. Although a few years old now, the answer on <a href="http://askubuntu.com/questions/142549/how-to-install-ubuntu-on-virtualbox">AskUbuntu</a> is still valid today and is worth reading after you have installed VirtualBox. I highly recommend you also install the <a href="https://www.virtualbox.org/wiki/Downloads">Guest Additions</a> iso to enable functionality such as drag and drop between host and guest, and window resizing.</p>
+
+<p><img align=“center” src="/media/ubuntu-vm-mac.png"></p>
+
+<p>There are a few extra packages you will need out-of-the-box for snapd development so once logged in to your shiny new Ubuntu install you will need to check for, and install, updates:</p>
+
+<pre>
+  sudo apt-get update
+  sudo apt-get upgrade
+</pre>
+
+<p>In addition to the updates you will need to install <code>git</code>, <code>bzr</code>, <code>golang</code>, and it is useful to install <code>snapcraft</code> and <code>snapcraft-examples</code> for snapping applications later:</p>
+
+<pre>
+  sudo apt-get install git bzr golang snapcraft snapcraft-examples
+</pre>
+
+<p>So now you have Ubuntu on your development machine, what next?</p>
+
+<h2 id="github:fe302d14b47fc72325260d8f135290c5">GitHub</h2>
+
+<p>As stated previously, all <code>snapd</code> development occurs in GitHub. To be able to contribute to the project you will need a GitHub account so go ahead and create one. Fortunately GitHub&rsquo;s documentation is easy to follow so you will need to <a href="https://help.github.com/articles/signing-up-for-a-new-github-account/">sign up for a new account</a> - a free account is just fine, and follow that up by <a href="https://help.github.com/articles/set-up-git/">setting up Git</a>. We are going to be using ssh for cloning so <a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">generating SSH keys</a> is also needed but if this is a little too scary you can use the <a href="https://help.github.com/articles/which-remote-url-should-i-use/#cloning-with-https-urls-recommended">HTTPS method</a> instead, just be aware that instructions further down and in Zygmunt&rsquo;s post will need to be modified slightly but I&rsquo;ll point that out. For reference there is a good <a href="[Git Cheatsheet](https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf">Git cheatsheet</a> available from GitHub that is worth looking at.</p>
+
+<p>Now we have a working Ubuntu install, Git and GitHub all set up, it is time to get developing.</p>
+
+<h2 id="snapd-development:fe302d14b47fc72325260d8f135290c5">snapd development</h2>
+
+<p>Fortunately Zygmunt has this bit covered. He has a <a href="http://www.zygoon.pl/2016/06/making-your-first-contribution-to-snapd.html">great tutorial</a> on how to fork the <code>snapd</code> project in GitHub (just go to the project and click the Fork button in the top-right corner) and set up the GO environment variables ready for development. I highly recommend using the same directory structure as Zygmunt (mine is <code>~/development/src/github.com/snapcore/snapd</code> for <code>snapd</code>) as this allows you to use his very useful <code>devtools</code> branch for useful helper functions and make sure you run the <code>get-deps.sh</code> script in the <code>snapd</code> directory to ensure you have everything set up correctly. Make sure to also get the <code>devtools</code> branch with a </code>git clone</code> and have this ready somewhere in your development directory outside of the snapd directory.</p>
+
+<pre>
+  git clone git@github.com:zyga/devtools
+</pre>
+
+<p><img align=“center” src="/media/snapd-refresh-bits.png"></p>
+
+<p>Development workflow is particularly nice. You hack on the code, run the tests, refresh the <code>snapd</code> code with your changes, and test them manually. The <code>refresh-bits</code> script from <code>devtools</code> starts up a separate instance of <code>snapd</code> with your changes and allows you to install snaps and test your code without affecting the host system. On my system this looks something like this (expanded a little for clarity):</p>
+
+<pre>
+cd ~/development/src/github.com/snapcore/snapd
+** hack, hack, hack **
+./run-checks
+** iterate until the tests are happy **
+cd ~/development/src/github.com/devtools
+./refresh-bits snap snapd setup run-snapd restore
+** open second terminal and test changes **
+</pre>
+
+<h2 id="whats-next:fe302d14b47fc72325260d8f135290c5">Whats next?</h2>
+
+<p>Well that bit is easy, talk to the developers on <a href="https://webchat.freenode.net/?channels=snappy">irc</a>, sign up to the <a href="https://lists.ubuntu.com/mailman/listinfo/snapcraft">mailing list</a>, go find a <a href="https://bugs.launchpad.net/snappy">bug to fix</a>, but most importantly, get involved!</p>
+
+	  <ul id="tags">
+		<h3>Tags: </h3>
+	    
+	      [<a href="/tags/development">Development</a>]
+	    
+	      [<a href="/tags/linux">Linux</a>]
+	    
+	      [<a href="/tags/snappy">Snappy</a>]
+	    
+	      [<a href="/tags/snapd">snapd</a>]
+	    
+	  </ul>
+</div>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+         
+        var disqus_shortname = 'linuxukorg'; 
+
+         
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </body>
+</html>
